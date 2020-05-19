@@ -4,9 +4,9 @@ export const TodoListContext = createContext();
 
 const TodoListContextProvider = (props) => {
   const [todos, setTodos] = useState([
-    { todo: 'Read the book', id: 1 },
-    { todo: 'Watch the documentary', id: 2 },
-    { todo: 'Finish 125 steps', id: 3 },
+    { todoTitle: 'Read the book', id: 1 },
+    { todoTitle: 'Watch the documentary', id: 2 },
+    { todoTitle: 'Finish 125 steps', id: 3 },
   ]);
 
   return (
