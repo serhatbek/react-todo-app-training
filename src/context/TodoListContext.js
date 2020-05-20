@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 export const TodoListContext = createContext();
 
@@ -9,8 +10,20 @@ const TodoListContextProvider = (props) => {
     { todoTitle: 'Finish 125 steps', id: 3 },
   ]);
 
+  const addTodo = (title) => {
+    setTodos([...todos, { todoTitle: title, id: uuid() }]);
+  };
+
+  const removeTodo = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const clearList = () => {
+    setTodos([]);
+  };
+
   return (
-    <TodoListContext.Provider value={{ todos }}>
+    <TodoListContext.Provider value={{ todos, addTodo, removeTodo, clearList }}>
       {props.children}
     </TodoListContext.Provider>
   );
