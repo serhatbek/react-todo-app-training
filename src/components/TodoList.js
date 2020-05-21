@@ -7,11 +7,15 @@ const TodoList = () => {
 
   return (
     <div>
-      <ul className="list">
-        {todos.map((todo) => {
-          return <Todo todo={todo} key={todo.id} />;
-        })}
-      </ul>
+      {todos.length ? (
+        <ul className="list">
+          {todos.map((todo) => {
+            return <Todo todo={todo} key={todo.id} />;
+          })}
+        </ul>
+      ) : (
+        <div className="no-todos">Nothing to do yet...</div>
+      )}
     </div>
   );
 };

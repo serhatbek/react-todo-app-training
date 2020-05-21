@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { TodoListContext } from '../context/TodoListContext';
 
 const Todo = ({ todo }) => {
-  const { removeTodo } = useContext(TodoListContext);
+  const { removeTodo, findItem } = useContext(TodoListContext);
 
   return (
     <li className="list-item">
-      <span>{todo.todoTitle}</span>
+      <span>{todo.title}</span>
       <div>
         <button
           onClick={() => removeTodo(todo.id)}
@@ -14,7 +14,7 @@ const Todo = ({ todo }) => {
         >
           <i className="fas fa-trash-alt"></i>
         </button>
-        <button className="btn-edit todo-btn">
+        <button onClick={() => findItem(todo.id)} className="btn-edit todo-btn">
           <i className="fas fa-pen"></i>
         </button>
       </div>

@@ -1,8 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { TodoListContext } from '../context/TodoListContext';
 
 const TodoForm = () => {
-  const { addTodo, clearList } = useContext(TodoListContext);
+  const { addTodo, clearList, editItem, editTodo } = useContext(
+    TodoListContext
+  );
 
   const [title, setTitle] = useState('');
 
@@ -12,9 +14,21 @@ const TodoForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addTodo(title);
-    setTitle('');
+    if (!editItem) {
+      addTodo(title);
+      setTitle('');
+    } else {
+      editTodo(title, editItem.id);
+    }
   };
+
+  useEffect(() => {
+    if (editItem) {
+      setTitle(editItem.title);
+    } else {
+      setTitle('');
+    }
+  }, [editItem]);
 
   return (
     <form onSubmit={handleSubmit} className="form">
@@ -28,7 +42,7 @@ const TodoForm = () => {
       />
       <div className="buttons">
         <button type="submit" className="btn add-todo-btn">
-          Add To Do
+          {editItem ? 'Edit To Do' : 'Add To Do'}
         </button>
         <button onClick={clearList} className="btn clear-btn">
           Clear
